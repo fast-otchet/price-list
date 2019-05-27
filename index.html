@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Прайс</title>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+        <link rel="stylesheet" href="css/main.css" media="screen" type="text/css" />       
+        <script type="text/javascript" src="js/jquery.js"></script>        
+</head>
+<body>
+
+        <div id="wrapper">
+            <header>
+                <a href="index.html"><h1>Logo</h1></a>
+      
+                <div id="banner">
+                    <img src="img/main.jpg" alt="banner" />
+                </div>
+
+            </header>    
+
+            <section id="main">
+                <h1>Выберите раздел программных продуктов</h1>
+				
+				
+           <form name="form1">
+   
+    <select id="category" class="link" onchange="show(this)">
+    <option disabled>Выберите раздел</option>
+</select>
+</form>
+<br><br>
+ <table class="table_price" width="90%" id="product">
+  
+  </table>
+
+
+<script type="text/javascript">
+//заполнение селектора
+$(function(){
+    $.getJSON('category.json', function(data) {
+                for(var i=0;i<data.category.length;i++){
+					$('#category').append('<option value="' + data.category[i].id_category + '">' + data.category[i].naim_category + '</option>');
+				}
+    });
+});
+
+var ele = document.getElementById('category');
+
+function show(ele) {
+// очистка таблицы от предыдущих данных
+var alles_tr=document.getElementsByTagName("tr");
+    for(i=0;i<alles_tr.length;i++){
+        alles_tr[i].innerHTML="";
+    }
+//добавляем шапку таблицы
+$('#product').append('<tr><th>Наименование</th><th>Single <br> руб. </th><th>Team <br> руб.</th><th>Site <br> руб.</th> </tr>')
+
+ var msg = document.getElementById('msg');
+// заполнение таблицы в зависимости от выбранного селекта
+
+    $.getJSON('product.json', function(data) {		
+            for(var i=0;i<data.product.length;i++){
+				if (data.product[i].id_category==ele.selectedIndex){
+                $('#product').append('<tr><td>' + data.product[i].naim_product + '</td><td>' + data.product[i].single + 
+                '</td><td>' + data.product[i].team + '</td><td>'+ data.product[i].site + '</td></tr>');
+            }
+			}
+    });
+}
+</script>       
+            </section>
+<br><br><br>
+        </div>
+
+    </body>
+</html>

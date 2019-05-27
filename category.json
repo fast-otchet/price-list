@@ -1,0 +1,18 @@
+{"category":[{
+	"id_category": 1,
+	"naim_category": ".Net"
+},
+
+{
+	"id_category": 2,
+	"naim_category": "VCL"
+},
+
+{
+	"id_category": 3,
+	"naim_category": "Cross-platform"
+},
+{
+	"id_category": 4,
+	"naim_category": "Tools"
+}]}
